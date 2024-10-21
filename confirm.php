@@ -1,7 +1,3 @@
-<?php
-header('Location: regist.php');
-exit;
-?>
 <!DOCTYPE html>
 <html lang="ja">
 
