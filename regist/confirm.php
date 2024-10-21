@@ -13,19 +13,19 @@
         <h2 class="text-2xl font-bold mb-6 text-center">犬の登録確認</h2>
         <div class="mb-4">
             <strong class="block text-gray-700">犬の名前:</strong>
-            <p class="mt-1 text-gray-600">バディ</p>
+            <p class="mt-1 text-gray-600"></p>
         </div>
         <div class="mb-4">
             <strong class="block text-gray-700">ユーザ名:</strong>
-            <p class="mt-1 text-gray-600">user123</p>
+            <p class="mt-1 text-gray-600"></p>
         </div>
         <div class="mb-4">
             <strong class="block text-gray-700">Email:</strong>
-            <p class="mt-1 text-gray-600">example@example.com</p>
+            <p class="mt-1 text-gray-600"></p>
         </div>
         <div class="mb-4">
             <strong class="block text-gray-700">パスワード:</strong>
-            <p class="mt-1 text-gray-600">********</p>
+            <p class="mt-1 text-gray-600"></p>
         </div>
         <div class="mb-4">
             <strong class="block text-gray-700">犬の画像:</strong>
@@ -33,11 +33,11 @@
         </div>
         <div class="mb-4">
             <strong class="block text-gray-700">住所:</strong>
-            <p class="mt-1 text-gray-600">東京都新宿区1-1-1</p>
+            <p class="mt-1 text-gray-600"></p>
         </div>
         <div class="mb-4">
             <strong class="block text-gray-700">電話番号:</strong>
-            <p class="mt-1 text-gray-600">090-1234-5678</p>
+            <p class="mt-1 text-gray-600"></p>
         </div>
         <div class="flex justify-between mt-6">
             <button onclick="location.href='index.php'" class="bg-gray-300 text-gray-800 p-2 rounded-md hover:bg-gray-400">戻る</button>
