@@ -15,7 +15,7 @@
         <ul class="flex space-x-4">
           <li><a href="#" class="text-gray-600 hover:text-blue-500">ホーム</a></li>
           <li><a href="#" class="text-gray-600 hover:text-blue-500">ペット一覧</a></li>
-          <li><a href="regist/" class="text-gray-600 hover:text-blue-500">ペット登録</a></li>
+          <li><a href="regist/" class="text-gray-600 hover:text-blue-500" action="regist.php" method="post">>ペット登録</a></li>
         </ul>
       </nav>
     </div>
@@ -27,7 +27,7 @@
 
       <!-- 検索バー -->
       <section class="text-center my-8">
-        <h2 class="text-4xl font-semibold text-gray-800">理想のペットを見つけよう！</h2>
+        <h2 class="text-4xl font-semibold text-gray-800">迷子のペットを見つけよう</h2>
         <p class="text-gray-500 mt-2">種類や特徴でペットを検索できます</p>
         <div class="mt-6 flex justify-center">
           <input type="text" placeholder="犬、猫、鳥..." class="w-2/3 md:w-1/2 px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400">
