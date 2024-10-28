@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -15,7 +17,7 @@
         <ul class="flex space-x-4">
           <li><a href="#" class="text-gray-600 hover:text-blue-500">ホーム</a></li>
           <li><a href="#" class="text-gray-600 hover:text-blue-500">ペット一覧</a></li>
-          <li><a href="regist/" class="text-gray-600 hover:text-blue-500" action="regist.php" method="post">>ペット登録</a></li>
+          <li><a href="regist.php" class="text-gray-600 hover:text-blue-500">ペット登録</a></li>
         </ul>
       </nav>
     </div>
