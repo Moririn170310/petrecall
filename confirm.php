@@ -40,8 +40,8 @@
             <p class="mt-1 text-gray-600"></p>
         </div>
         <div class="flex justify-between mt-6">
-            <button onclick="location.href='index.php'" class="bg-gray-300 text-gray-800 p-2 rounded-md hover:bg-gray-400">戻る</button>
-            <button onclick="location.href='home.php'" class="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600">登録</button>
+            <button onclick="location.href='regist.php'" class="bg-gray-300 text-gray-800 p-2 rounded-md hover:bg-gray-400">戻る</button>
+            <button onclick="location.href='index.php'" class="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600">登録</button>
         </div>    
     </div>
 </body>
