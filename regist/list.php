@@ -39,8 +39,14 @@ $pets = [
 <body class="bg-gray-100">
     <!-- ヘッダー -->
     <header class="bg-white shadow">
-        <div class="max-w-7xl mx-auto px-4 py-6">
+        <div class="max-w-7xl mx-auto px-4 py-6 flex justify-between items-center">
             <h1 class="text-3xl font-bold text-gray-800">ペット一覧</h1>
+            <nav>
+                <ul class="flex space-x-4">
+                    <li><a href="index.php" class="text-gray-600 hover:text-blue-500">ホーム</a></li>
+                    <li><a href="list.php" class="text-gray-600 hover:text-blue-500">ペット一覧</a></li>
+                </ul>
+            </nav>
         </div>
     </header>
 
