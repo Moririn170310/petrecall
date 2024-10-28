@@ -18,8 +18,8 @@
       <h1 class="text-3xl font-bold text-gray-800">ペット検索システム</h1>
       <nav>
         <ul class="flex space-x-4">
-          <li><a href="index.php" class="text-gray-600 hover:text-blue-500">ホーム</a></li> <!-- ホームリンク -->
-          <li><a href="list.php" class="text-gray-600 hover:text-blue-500">ペット一覧</a></li> <!-- ペット一覧リンクを追加 -->
+          <li><a href="index.php" class="text-gray-600 hover:text-blue-500">ホーム</a></li>
+          <li><a href="list.php" class="text-gray-600 hover:text-blue-500">ペット一覧</a></li>
           <li><a href="regist.php" class="text-gray-600 hover:text-blue-500">ペット登録</a></li>
         </ul>
       </nav>
@@ -44,48 +44,26 @@
       <section class="my-12" id="petCategories">
         <h2 class="text-3xl font-semibold text-gray-800 mb-6">ペットのカテゴリ</h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          <div class="bg-white p-6 rounded-lg shadow pet-card" data-name="犬">
+          <a href="dog.php" class="bg-white p-6 rounded-lg shadow pet-card">
             <img src="https://via.placeholder.com/150" alt="犬" class="w-full h-32 object-cover rounded-md">
             <h3 class="text-xl font-semibold mt-4">犬</h3>
             <p class="text-gray-500 mt-2">様々な種類の犬を検索できます</p>
-          </div>
-          <div class="bg-white p-6 rounded-lg shadow pet-card" data-name="猫">
+          </a>
+          <a href="cat.php" class="bg-white p-6 rounded-lg shadow pet-card">
             <img src="https://via.placeholder.com/150" alt="猫" class="w-full h-32 object-cover rounded-md">
             <h3 class="text-xl font-semibold mt-4">猫</h3>
             <p class="text-gray-500 mt-2">猫の里親探しに役立つ情報が満載</p>
-          </div>
-          <div class="bg-white p-6 rounded-lg shadow pet-card" data-name="鳥">
+          </a>
+          <a href="bird.php" class="bg-white p-6 rounded-lg shadow pet-card">
             <img src="https://via.placeholder.com/150" alt="鳥" class="w-full h-32 object-cover rounded-md">
             <h3 class="text-xl font-semibold mt-4">鳥</h3>
             <p class="text-gray-500 mt-2">鳥の種類ごとの情報が充実</p>
-          </div>
-          <div class="bg-white p-6 rounded-lg shadow pet-card" data-name="その他のペット">
+          </a>
+          <a href="other.php" class="bg-white p-6 rounded-lg shadow pet-card">
             <img src="https://via.placeholder.com/150" alt="その他のペット" class="w-full h-32 object-cover rounded-md">
             <h3 class="text-xl font-semibold mt-4">その他のペット</h3>
             <p class="text-gray-500 mt-2">珍しいペットの情報はこちら</p>
-          </div>
-        </div>
-      </section>
-
-      <!-- 人気ペットセクション -->
-      <section class="my-12">
-        <h2 class="text-3xl font-semibold text-gray-800 mb-6">迷子のペット</h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div class="bg-white p-6 rounded-lg shadow pet-card" data-name="ポメラニアン">
-            <img src="https://via.placeholder.com/300" alt="ペット1" class="w-full h-48 object-cover rounded-md">
-            <h3 class="text-2xl font-semibold mt-4">ポメラニアン</h3>
-            <p class="text-gray-500 mt-2"></p>
-          </div>
-          <div class="bg-white p-6 rounded-lg shadow pet-card" data-name="スコティッシュフォールド">
-            <img src="https://via.placeholder.com/300" alt="ペット2" class="w-full h-48 object-cover rounded-md">
-            <h3 class="text-2xl font-semibold mt-4">スコティッシュフォールド</h3>
-            <p class="text-gray-500 mt-2"></p>
-          </div>
-          <div class="bg-white p-6 rounded-lg shadow pet-card" data-name="オカメインコ">
-            <img src="https://via.placeholder.com/300" alt="ペット3" class="w-full h-48 object-cover rounded-md">
-            <h3 class="text-2xl font-semibold mt-4">オカメインコ</h3>
-            <p class="text-gray-500 mt-2"></p>
-          </div>
+          </a>
         </div>
       </section>
     </div>
@@ -104,7 +82,7 @@
       const petCards = document.querySelectorAll('.pet-card');
 
       petCards.forEach(card => {
-        const petName = card.getAttribute('data-name').toLowerCase();
+        const petName = card.querySelector('h3').textContent.toLowerCase();
         if (petName.includes(input)) {
           card.classList.remove('hidden');
         } else {
