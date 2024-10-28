@@ -68,6 +68,47 @@
       </section>
     </div>
   </main>
+  <script>
+    function searchPets() {
+      const input = document.getElementById('searchInput').value.toLowerCase();
+      const petCards = document.querySelectorAll('.pet-card');
+
+      petCards.forEach(card => {
+        const petName = card.querySelector('h3').textContent.toLowerCase();
+        if (petName.includes(input)) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    }
+  </script>
+</body>
+</html>
+
+      <!-- 人気ペットセクション -->
+      <section class="my-12">
+        <h2 class="text-3xl font-semibold text-gray-800 mb-6">迷子のペット</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="bg-white p-6 rounded-lg shadow pet-card" data-name="ポメラニアン">
+            <img src="https://via.placeholder.com/300" alt="ペット1" class="w-full h-48 object-cover rounded-md">
+            <h3 class="text-2xl font-semibold mt-4">ポメラニアン</h3>
+            <p class="text-gray-500 mt-2"></p>
+          </div>
+          <div class="bg-white p-6 rounded-lg shadow pet-card" data-name="スコティッシュフォールド">
+            <img src="https://via.placeholder.com/300" alt="ペット2" class="w-full h-48 object-cover rounded-md">
+            <h3 class="text-2xl font-semibold mt-4">スコティッシュフォールド</h3>
+            <p class="text-gray-500 mt-2"></p>
+          </div>
+          <div class="bg-white p-6 rounded-lg shadow pet-card" data-name="オカメインコ">
+            <img src="https://via.placeholder.com/300" alt="ペット3" class="w-full h-48 object-cover rounded-md">
+            <h3 class="text-2xl font-semibold mt-4">オカメインコ</h3>
+            <p class="text-gray-500 mt-2"></p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
 
   <!-- フッター -->
   <footer class="bg-gray-800 text-white py-6 mt-12">
@@ -82,7 +123,7 @@
       const petCards = document.querySelectorAll('.pet-card');
 
       petCards.forEach(card => {
-        const petName = card.querySelector('h3').textContent.toLowerCase();
+        const petName = card.getAttribute('data-name').toLowerCase();
         if (petName.includes(input)) {
           card.classList.remove('hidden');
         } else {
