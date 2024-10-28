@@ -69,22 +69,22 @@
 
       <!-- 人気ペットセクション -->
       <section class="my-12">
-        <h2 class="text-3xl font-semibold text-gray-800 mb-6">人気のペット</h2>
+        <h2 class="text-3xl font-semibold text-gray-800 mb-6">迷子のペット</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div class="bg-white p-6 rounded-lg shadow pet-card" data-name="ポメラニアン">
             <img src="https://via.placeholder.com/300" alt="ペット1" class="w-full h-48 object-cover rounded-md">
             <h3 class="text-2xl font-semibold mt-4">ポメラニアン</h3>
-            <p class="text-gray-500 mt-2">小型で愛らしい犬です。</p>
+            <p class="text-gray-500 mt-2"></p>
           </div>
           <div class="bg-white p-6 rounded-lg shadow pet-card" data-name="スコティッシュフォールド">
             <img src="https://via.placeholder.com/300" alt="ペット2" class="w-full h-48 object-cover rounded-md">
             <h3 class="text-2xl font-semibold mt-4">スコティッシュフォールド</h3>
-            <p class="text-gray-500 mt-2">丸い耳が特徴の猫です。</p>
+            <p class="text-gray-500 mt-2"></p>
           </div>
           <div class="bg-white p-6 rounded-lg shadow pet-card" data-name="オカメインコ">
             <img src="https://via.placeholder.com/300" alt="ペット3" class="w-full h-48 object-cover rounded-md">
             <h3 class="text-2xl font-semibold mt-4">オカメインコ</h3>
-            <p class="text-gray-500 mt-2">明るい性格の鳥です。</p>
+            <p class="text-gray-500 mt-2"></p>
           </div>
         </div>
       </section>
