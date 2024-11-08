@@ -1,14 +1,23 @@
 <?php
-$host = 'localhost';  // MySQLサーバーのホスト名
-$dbname = 'pet_db';  // 使用するデータベース名
-$username = 'root';  // MySQLのユーザー名
-$password = '';      // MySQLのパスワード
-
+// SQLiteデータベースへの接続
+$dsn = 'sqlite:pet.db';
 try {
-    $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+    $pdo = new PDO($dsn);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    // テーブルが存在しない場合は作成
+    $pdo->exec("CREATE TABLE IF NOT EXISTS pets (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        dog_name TEXT,
+        user_name TEXT,
+        email TEXT,
+        password TEXT,
+        address TEXT,
+        phone TEXT,
+        image BLOB
+    )");
 } catch (PDOException $e) {
-    echo "データベース接続エラー: " . $e->getMessage();
+    echo "接続エラー: " . $e->getMessage();
     exit;
 }
 ?>

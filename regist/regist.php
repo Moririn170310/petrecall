@@ -43,37 +43,38 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body class="bg-gray-100 flex items-center justify-center min-h-screen">
     <div class="bg-white p-8 rounded-lg shadow-md w-96">
         <h2 class="text-2xl font-bold mb-6 text-center">犬の登録</h2>
-        <form action="regist.php" method="post" enctype="multipart/form-data">
-            <div class="mb-4">
-                <label class="block text-gray-700">犬の名前</label>
-                <input type="text" name="dog_name" class="mt-1 block w-full p-2 border rounded-md">
-            </div>
-            <div class="mb-4">
-                <label class="block text-gray-700">ユーザ名</label>
-                <input type="text" name="user_name" class="mt-1 block w-full p-2 border rounded-md">
-            </div>
-            <div class="mb-4">
-                <label class="block text-gray-700">Email</label>
-                <input type="email" name="email" class="mt-1 block w-full p-2 border rounded-md">
-            </div>
-            <div class="mb-4">
-                <label class="block text-gray-700">パスワード</label>
-                <input type="password" name="password" class="mt-1 block w-full p-2 border rounded-md">
-            </div>
-            <div class="mb-4">
-                <label class="block text-gray-700">犬の画像</label>
-                <input type="file" name="dog_image" class="mt-1 block w-full p-2 border rounded-md" accept="image/*">
-            </div>
-            <div class="mb-4">
-                <label class="block text-gray-700">住所</label>
-                <input type="text" name="address" class="mt-1 block w-full p-2 border rounded-md">
-            </div>
-            <div class="mb-4">
-                <label class="block text-gray-700">電話番号</label>
-                <input type="tel" name="phone" class="mt-1 block w-full p-2 border rounded-md">
-            </div>
-            <button type="submit" class="w-full bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600">登録</button>
-        </form>
+        <form action="confirm.php" method="post" enctype="multipart/form-data">
+    <div class="mb-4">
+        <label class="block text-gray-700">犬の名前</label>
+        <input type="text" name="dog_name" class="mt-1 block w-full p-2 border rounded-md" required>
+    </div>
+    <div class="mb-4">
+        <label class="block text-gray-700">ユーザ名</label>
+        <input type="text" name="user_name" class="mt-1 block w-full p-2 border rounded-md" required>
+    </div>
+    <div class="mb-4">
+        <label class="block text-gray-700">Email</label>
+        <input type="email" name="email" class="mt-1 block w-full p-2 border rounded-md" required>
+    </div>
+    <div class="mb-4">
+        <label class="block text-gray-700">パスワード</label>
+        <input type="password" name="password" class="mt-1 block w-full p-2 border rounded-md" required>
+    </div>
+    <div class="mb-4">
+        <label class="block text-gray-700">犬の画像</label>
+        <input type="file" name="dog_image" class="mt-1 block w-full p-2 border rounded-md" accept="image/*" required>
+    </div>
+    <div class="mb-4">
+        <label class="block text-gray-700">住所</label>
+        <input type="text" name="address" class="mt-1 block w-full p-2 border rounded-md" required>
+    </div>
+    <div class="mb-4">
+        <label class="block text-gray-700">電話番号</label>
+        <input type="tel" name="phone" class="mt-1 block w-full p-2 border rounded-md" required>
+    </div>
+    <button type="submit" class="w-full bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600">登録</button>
+</form>
+
     </div>
 </body>
 </html>
