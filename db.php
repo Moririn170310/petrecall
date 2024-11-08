@@ -1,13 +1,14 @@
 <?php
-$dsn = 'mysql:host=localhost;dbname=pet_database;charset=utf8';
-$username = 'root';  // あなたのデータベースのユーザー名
-$password = '';      // あなたのデータベースのパスワード
+$host = 'localhost';  // MySQLサーバーのホスト名
+$dbname = 'pet_db';  // 使用するデータベース名
+$username = 'root';  // MySQLのユーザー名
+$password = '';      // MySQLのパスワード
 
 try {
-    $pdo = new PDO($dsn, $username, $password);
+    $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
-    echo 'Connection failed: ' . $e->getMessage();
+    echo "データベース接続エラー: " . $e->getMessage();
     exit;
 }
 ?>

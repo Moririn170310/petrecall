@@ -1,31 +1,9 @@
 <?php
-// 犬と猫のデータ（例として配列を使用）
-$pets = [
-    [
-        'type' => '犬',
-        'name' => 'ポメラニアン',
-        'description' => '小型で愛らしい犬です。',
-        'image' => 'https://via.placeholder.com/150?text=ポメラニアン'
-    ],
-    [
-        'type' => '犬',
-        'name' => 'ゴールデンレトリバー',
-        'description' => '友好的で賢い犬です。',
-        'image' => 'https://via.placeholder.com/150?text=ゴールデンレトリバー'
-    ],
-    [
-        'type' => '猫',
-        'name' => 'スコティッシュフォールド',
-        'description' => '丸い耳が特徴の猫です。',
-        'image' => 'https://via.placeholder.com/150?text=スコティッシュフォールド'
-    ],
-    [
-        'type' => '猫',
-        'name' => 'アメリカンショートヘア',
-        'description' => '短毛で活発な猫です。',
-        'image' => 'https://via.placeholder.com/150?text=アメリカンショートヘア'
-    ],
-];
+include 'db.php';
+
+// ペット情報をデータベースから取得
+$stmt = $pdo->query("SELECT * FROM pets");
+$pets = $stmt->fetchAll();
 ?>
 
 <!DOCTYPE html>
@@ -33,48 +11,21 @@ $pets = [
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ペット一覧</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>犬の一覧</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body class="bg-gray-100">
-    <!-- ヘッダー -->
-    <header class="bg-white shadow">
-        <div class="max-w-7xl mx-auto px-4 py-6 flex justify-between items-center">
-            <h1 class="text-3xl font-bold text-gray-800">ペット一覧</h1>
-            <nav>
-                <ul class="flex space-x-4">
-                    <li><a href="index.php" class="text-gray-600 hover:text-blue-500">ホーム</a></li>
-                    <li><a href="list.php" class="text-gray-600 hover:text-blue-500">ペット一覧</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-
-    <!-- メインコンテンツ -->
-    <main class="mt-8">
-        <div class="max-w-7xl mx-auto px-4">
-
-            <!-- ペットリスト -->
-            <section class="my-12">
-                <h2 class="text-2xl font-semibold text-gray-800 mb-6">犬と猫の一覧</h2>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <?php foreach ($pets as $pet): ?>
-                    <div class="bg-white p-6 rounded-lg shadow">
-                        <img src="<?php echo $pet['image']; ?>" alt="<?php echo $pet['name']; ?>" class="w-full h-32 object-cover rounded-md">
-                        <h3 class="text-xl font-semibold mt-4"><?php echo $pet['name']; ?></h3>
-                        <p class="text-gray-500 mt-2"><?php echo $pet['description']; ?></p>
-                    </div>
-                    <?php endforeach; ?>
-                </div>
-            </section>
-        </div>
-    </main>
-
-    <!-- フッター -->
-    <footer class="bg-gray-800 text-white py-6 mt-12">
-        <div class="max-w-7xl mx-auto px-4 text-center">
-            <p>&copy; 2024 ペット検索システム. All rights reserved.</p>
-        </div>
-    </footer>
+<body class="bg-gray-100 p-8">
+    <h2 class="text-2xl font-bold mb-6 text-center">犬の一覧</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <?php foreach ($pets as $pet): ?>
+            <div class="bg-white p-4 rounded-lg shadow-md">
+                <img src="<?php echo $pet['dog_image']; ?>" alt="犬の画像" class="w-full h-48 object-cover rounded-md mb-4">
+                <h3 class="text-xl font-semibold"><?php echo $pet['dog_name']; ?></h3>
+                <p class="text-gray-600"><?php echo $pet['user_name']; ?></p>
+                <p class="text-gray-600"><?php echo $pet['address']; ?></p>
+                <a href="detail.php?id=<?php echo $pet['id']; ?>" class="text-blue-500 hover:text-blue-700 mt-2 inline-block">詳細</a>
+            </div>
+        <?php endforeach; ?>
+    </div>
 </body>
 </html>
