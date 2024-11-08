@@ -28,7 +28,7 @@ if ($_FILES['dog_image']['error'] === UPLOAD_ERR_OK) {
 <body class="bg-gray-100 flex items-center justify-center min-h-screen">
     <div class="bg-white p-8 rounded-lg shadow-md w-96">
         <h2 class="text-2xl font-bold mb-6 text-center">犬の登録確認</h2>
-        <form action="register_pet.php" method="post">
+        <form action="index.php" method="post">
             <div class="mb-4">
                 <strong class="block text-gray-700">犬の名前:</strong>
                 <p class="mt-1 text-gray-600"><?php echo htmlspecialchars($dog_name); ?></p>
