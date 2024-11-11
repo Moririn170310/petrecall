@@ -23,7 +23,7 @@ $pets = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <?php foreach ($pets as $pet): ?>
                 <div class="bg-white p-4 rounded-lg shadow-lg">
-                    <img src="data:image/jpeg;base64,<?php echo base64_encode($pet['image']); ?>" alt="犬の画像" class="w-full h-48 object-cover rounded-md mb-4">
+                    <img src="data:image/jpeg;base64,<?php echo base64_encode($pet['dog_image']); ?>" alt="犬の画像" class="w-full h-48 object-cover rounded-md mb-4">
                     <h2 class="text-xl font-semibold"><?php echo htmlspecialchars($pet['dog_name']); ?></h2>
                     <p class="mt-2 text-gray-600"><?php echo htmlspecialchars($pet['user_name']); ?>さんの犬</p>
                     <p class="mt-2 text-gray-600">Email: <?php echo htmlspecialchars($pet['email']); ?></p>
