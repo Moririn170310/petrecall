@@ -24,4 +24,3 @@ $animals = $animal->getList();
 </body>
 
 </html>
-a
