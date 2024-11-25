@@ -1,132 +1,74 @@
+<?php
+require_once "../models/Animal.php";
+
+$animal = new Animal();
+$animals = $animal->getList();
+
+?>
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ペット検索システム</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    .hidden {
-      display: none;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>犬の登録画面</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body class="bg-gray-100">
-  <!-- ヘッダー -->
-  <header class="bg-white shadow">
-    <div class="max-w-7xl mx-auto px-4 py-6 flex justify-between items-center">
-      <h1 class="text-3xl font-bold text-gray-800">ペット検索システム</h1>
-      <nav>
-        <ul class="flex space-x-4">
-          <li><a href="index.php" class="text-gray-600 hover:text-blue-500">ホーム</a></li>
-          <li><a href="list.php" class="text-gray-600 hover:text-blue-500">ペット一覧</a></li>
-          <li><a href="regist.php" class="text-gray-600 hover:text-blue-500">ペット登録</a></li>
-        </ul>
-      </nav>
+
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="bg-white p-8 rounded-lg shadow-md w-96">
+        <h2 class="text-2xl font-bold mb-6 text-center">ペットの登録</h2>
+        <form action="confirm.php" method="post" enctype="multipart/form-data">
+            <div class="mb-4">
+                <label class="block text-gray-700">ペットの名前</label>
+                <input type="text" name="name" class="mt-1 block w-full p-2 border rounded-md" required>
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700">ペットの種類</label>
+                <select name="animal_id" id="animal_id" class="p-2 border border-gray-200 rounded-md">
+                    <?php foreach ($animals as $value): ?>
+                        <option value="<?= $value['id'] ?>"><?= $value['name'] ?></option>
+                    <?php endforeach ?>
+                </select>
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700">ペットの画像</label>
+                <input type="file" name="image" class="mt-1 block w-full p-2 border rounded-md" accept="image/*" required>
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700">説明</label>
+                <textarea name="description" class="mt-1 block w-full p-2 border rounded-md" required></textarea>
+            </div>
+
+            <div class="mb-4">
+                <label class="block text-gray-700">ユーザ名</label>
+                <input type="text" name="user_name" class="mt-1 block w-full p-2 border rounded-md">
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700">Email</label>
+                <input type="email" name="email" class="mt-1 block w-full p-2 border rounded-md">
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700">パスワード</label>
+                <input type="password" name="password" class="mt-1 block w-full p-2 border rounded-md">
+            </div>
+
+            <div class="mb-4">
+                <label class="block text-gray-700">住所</label>
+                <input type="text" name="address" class="mt-1 block w-full p-2 border rounded-md">
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700">電話番号</label>
+                <input type="tel" name="phone" class="mt-1 block w-full p-2 border rounded-md">
+            </div>
+            
+            <!-- ボタン部分のレイアウト修正 -->
+            <div class="flex justify-between mt-6">
+                <button type="submit" class="w-48 bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">登録</button>
+                <a href="../" class="w-48 text-center bg-gray-300 text-black p-2 rounded-md hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-400">戻る</a>
+            </div>
+        </form>
     </div>
-  </header>
-
-  <!-- メインコンテンツ -->
-  <main class="mt-8">
-    <div class="max-w-7xl mx-auto px-4">
-
-      <!-- 検索バー -->
-      <section class="text-center my-8">
-        <h2 class="text-4xl font-semibold text-gray-800">迷子のペットを見つけよう</h2>
-        <p class="text-gray-500 mt-2">種類や特徴でペットを検索できます</p>
-        <div class="mt-6 flex justify-center">
-          <input id="searchInput" type="text" placeholder="犬、猫、鳥..." class="w-2/3 md:w-1/2 px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400">
-          <button onclick="searchPets()" class="ml-2 px-4 py-2 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600">検索</button>
-        </div>
-      </section>
-
-      <!-- カテゴリセクション -->
-      <section class="my-12" id="petCategories">
-        <h2 class="text-3xl font-semibold text-gray-800 mb-6">ペットのカテゴリ</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          <a href="list.php?animal_id=1" class="bg-white p-6 rounded-lg shadow pet-card">
-          <img src="img/2.jpeg" alt="犬" class="w-full h-32 object-cover rounded-md">
-
-            <h3 class="text-xl font-semibold mt-4">犬</h3>
-            <p class="text-gray-500 mt-2">様々な種類の犬を検索できます</p>
-          </a>
-          <a href="list.php?animal_id=2" class="bg-white p-6 rounded-lg shadow pet-card">
-            <img src="img/neko.webp" alt="猫" class="w-full h-32 object-cover rounded-md">
-            <h3 class="text-xl font-semibold mt-4">猫</h3>
-            <p class="text-gray-500 mt-2">猫の里親探しに役立つ情報が満載</p>
-          </a>
-          <a href="list.php?animal_id=3" class="bg-white p-6 rounded-lg shadow pet-card">
-            <img src="img/tori.jpg" alt="鳥" class="w-full h-32 object-cover rounded-md">
-            <h3 class="text-xl font-semibold mt-4">鳥</h3>
-            <p class="text-gray-500 mt-2">鳥の種類ごとの情報が充実</p>
-          </a>
-        </div>
-      </section>
-    </div>
-  </main>
-  <script>
-    function searchPets() {
-      const input = document.getElementById('searchInput').value.toLowerCase();
-      const petCards = document.querySelectorAll('.pet-card');
-
-      petCards.forEach(card => {
-        const petName = card.querySelector('h3').textContent.toLowerCase();
-        if (petName.includes(input)) {
-          card.classList.remove('hidden');
-        } else {
-          card.classList.add('hidden');
-        }
-      });
-    }
-  </script>
 </body>
-</html>
 
-      <!-- 人気ペットセクション -->
-      <section class="my-12">
-        <h2 class="text-3xl font-semibold text-gray-800 mb-6">迷子のペット</h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div class="bg-white p-6 rounded-lg shadow pet-card" data-name="ポメラニアン">
-            <img src="img/pome.jpg" alt="ペット1" class="w-full h-48 object-cover rounded-md">
-            <h3 class="text-2xl font-semibold mt-4">ポメラニアン</h3>
-            <p class="text-gray-500 mt-2"></p>
-          </div>
-          <div class="bg-white p-6 rounded-lg shadow pet-card" data-name="スコティッシュフォールド">
-            <img src="img/suko.jpg" alt="ペット2" class="w-full h-48 object-cover rounded-md">
-            <h3 class="text-2xl font-semibold mt-4">スコティッシュフォールド</h3>
-            <p class="text-gray-500 mt-2"></p>
-          </div>
-          <div class="bg-white p-6 rounded-lg shadow pet-card" data-name="オカメインコ">
-            <img src="img/oka.jpg" alt="ペット3" class="w-full h-48 object-cover rounded-md">
-            <h3 class="text-2xl font-semibold mt-4">オカメインコ</h3>
-            <p class="text-gray-500 mt-2"></p>
-          </div>
-        </div>
-      </section>
-    </div>
-  </main>
-
-  <!-- フッター -->
-  <footer class="bg-gray-800 text-white py-6 mt-12">
-    <div class="max-w-7xl mx-auto px-4 text-center">
-      <p>&copy; 2024 ペット検索システム. All rights reserved.</p>
-    </div>
-  </footer>
-
-  <script>
-    function searchPets() {
-      const input = document.getElementById('searchInput').value.toLowerCase();
-      const petCards = document.querySelectorAll('.pet-card');
-
-      petCards.forEach(card => {
-        const petName = card.getAttribute('data-name').toLowerCase();
-        if (petName.includes(input)) {
-          card.classList.remove('hidden');
-        } else {
-          card.classList.add('hidden');
-        }
-      });
-    }
-  </script>
-</body>
 </html>

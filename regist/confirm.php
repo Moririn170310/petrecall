@@ -65,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
 
             <div class="flex justify-between mt-6">
-                <a href="regist.php" class="bg-gray-300 text-gray-800 p-2 rounded-md hover:bg-gray-400">戻る</a>
+                <a href="./" class="bg-gray-300 text-gray-800 p-2 rounded-md hover:bg-gray-400">戻る</a>
                 <button type="submit" class="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600">登録</button>
             </div>
             <input type="hidden" name="name" value="<?= $posts['name']; ?>">

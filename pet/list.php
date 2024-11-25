@@ -2,7 +2,7 @@
 require_once "../models/Animal.php";
 
 // データベース接続
-require 'db.php';
+require '../db.php';
 
 if (isset($_GET['animal_id'])) {
   $animal_id = $_GET['animal_id'];
@@ -33,9 +33,9 @@ $pets = $stmt->fetchAll(PDO::FETCH_ASSOC);
   <div class="max-w-7xl mx-auto px-4 py-6 flex justify-between items-center">
     <nav>
       <ul class="flex space-x-4">
-        <li><a href="index.php" class="text-gray-600 hover:text-blue-500">ホーム</a></li>
+        <li><a href="../" class="text-gray-600 hover:text-blue-500">ホーム</a></li>
         <li><a href="list.php" class="text-gray-600 hover:text-blue-500">ペット一覧</a></li>
-        <li><a href="regist.php" class="text-gray-600 hover:text-blue-500">ペット登録</a></li>
+        <li><a href="../regist/" class="text-gray-600 hover:text-blue-500">ペット登録</a></li>
       </ul>
     </nav>
   </div>
@@ -43,7 +43,11 @@ $pets = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <body class="bg-gray-100">
   <div class="container mx-auto p-8">
-    <h1 class="text-3xl font-bold mb-8 text-center">登録された<?= $animal_data['name'] ?>の一覧</h1>
+    <?php if (isset($animal_data)): ?>
+      <h1 class="text-3xl font-bold mb-8 text-center">登録された<?= $animal_data['name'] ?>の一覧</h1>
+    <?php else: ?>
+      <h1 class="text-3xl font-bold mb-8 text-center">登録されたペットの一覧</h1>
+    <?php endif ?>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       <?php foreach ($pets as $pet): ?>
         <div class="bg-white p-4 rounded-lg shadow-lg">
