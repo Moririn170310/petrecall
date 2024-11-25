@@ -10,6 +10,10 @@ class Animal {
             "id" => 2,
             "name" => "猫",
         ],
+        [
+            "id" => 3,
+            "name" => "鳥",
+        ],
     ];
 
     function fetch($id)  {

@@ -44,26 +44,21 @@
       <section class="my-12" id="petCategories">
         <h2 class="text-3xl font-semibold text-gray-800 mb-6">ペットのカテゴリ</h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          <a href="dog.php" class="bg-white p-6 rounded-lg shadow pet-card">
+          <a href="list.php?animal_id=1" class="bg-white p-6 rounded-lg shadow pet-card">
           <img src="img/2.jpeg" alt="犬" class="w-full h-32 object-cover rounded-md">
 
             <h3 class="text-xl font-semibold mt-4">犬</h3>
             <p class="text-gray-500 mt-2">様々な種類の犬を検索できます</p>
           </a>
-          <a href="cat.php" class="bg-white p-6 rounded-lg shadow pet-card">
+          <a href="list.php?animal_id=2" class="bg-white p-6 rounded-lg shadow pet-card">
             <img src="img/neko.webp" alt="猫" class="w-full h-32 object-cover rounded-md">
             <h3 class="text-xl font-semibold mt-4">猫</h3>
             <p class="text-gray-500 mt-2">猫の里親探しに役立つ情報が満載</p>
           </a>
-          <a href="bird.php" class="bg-white p-6 rounded-lg shadow pet-card">
+          <a href="list.php?animal_id=3" class="bg-white p-6 rounded-lg shadow pet-card">
             <img src="img/tori.jpg" alt="鳥" class="w-full h-32 object-cover rounded-md">
             <h3 class="text-xl font-semibold mt-4">鳥</h3>
             <p class="text-gray-500 mt-2">鳥の種類ごとの情報が充実</p>
-          </a>
-          <a href="other.php" class="bg-white p-6 rounded-lg shadow pet-card">
-            <img src="img/hamu.jpg" alt="その他のペット" class="w-full h-32 object-cover rounded-md">
-            <h3 class="text-xl font-semibold mt-4">その他のペット</h3>
-            <p class="text-gray-500 mt-2">珍しいペットの情報はこちら</p>
           </a>
         </div>
       </section>
