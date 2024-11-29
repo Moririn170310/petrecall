@@ -1,32 +1,73 @@
 <?php
-require_once "../models/Animal.php";
+require_once '../db.php';
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // POSTデータを取得
-    $posts = $_POST;
+// POSTリクエストでなければ何も表示しない
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    exit;
+}
 
-    $animal = new Animal();
-    $animalData = $animal->fetch($posts['animal_id']);
+// セッション開始
+session_start();
+session_regenerate_id(true);
 
-    // 画像のアップロード処理
-    if (isset($_FILES['image'])) {
-        $imageName = $_FILES['image']['name'];
-        $imageTmpName = $_FILES['image']['tmp_name'];
+// セッションにPOSTデータを登録
+$_SESSION['regist'] = $_POST;
 
-        // UUID風の画像名を生成
-        $imageExtension = pathinfo($imageName, PATHINFO_EXTENSION);  // 画像の拡張子を取得
-        $uniqueImageName = uniqid('pet_', true) . '.' . $imageExtension;  // UUID風の名前を生成
+// POSTデータ受信（サニタイズ）
+$post = sanitize($_POST);
 
-        $imagePath = '../uploads/' . $uniqueImageName;
-        $posts['image_name'] = $uniqueImageName;
+// バリデーション（データチェック）
+if (isset($_SESSION['errors'])) {
+    unset($_SESSION['errors']);
+}
+$errors = validate($post, $pdo);
 
-        if (move_uploaded_file($imageTmpName, $imagePath)) {
-            // 画像のアップロード成功
-            // $image = file_get_contents($_FILES['image']['tmp_name']);
-        } else {
-            echo "画像のアップロードに失敗しました。";
-        }
+if ($errors) {
+    $_SESSION['errors'] = $errors;
+    header('Location: input.php');
+    exit;
+}
+
+/**
+ * サニタイズ
+ */
+function sanitize($array)
+{
+    if (!is_array($array)) return [];
+    foreach ($array as $key => $value) {
+        $array[$key] = htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
     }
+    return $array;
+}
+
+function validate($posts, $pdo)
+{
+    $errors = [];
+
+    // Email重複チェック
+    $sql = "SELECT * FROM users WHERE email = :email;";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute(['email' => $posts['email']]);
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+    if ($user) {
+        $errors['email'] = "Emailは既に登録されています";
+    }
+
+    // Validation
+    if (empty($posts['name'])) {
+        $errors['name'] = '名前を入力してください';
+    }
+    if (empty($posts['email'])) {
+        $errors['email'] = 'メールアドレスを入力してください';
+    }
+
+    $pattern = '/^(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9]{6,12}$/';
+    if (empty($posts['password'])) {
+        $errors['password'] = 'パスワードを入力してください';
+    } elseif (!preg_match($pattern, $posts['password'])) {
+        // $errors['password'] = 'パスワードは6文字以上12文字以内の半角英数で入力してください。（大文字、文字含む）';
+    }
+    return $errors;
 }
 ?>
 
@@ -36,44 +77,57 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ペットの登録確認画面</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <title>ペット検索システム - 会員登録確認</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="bg-gray-100 flex items-center justify-center min-h-screen">
-    <div class="bg-white p-8 rounded-lg shadow-md w-96">
-        <h2 class="text-2xl font-bold mb-6 text-center">ペットの登録確認</h2>
-        <form action="add.php" method="post">
-            <div class="mb-4">
-                <strong class="block text-gray-700">ペットの名前:</strong>
-                <p class="mt-1 text-gray-600"><?= $posts['name'] ?></p>
-            </div>
+<body class="bg-gray-100 min-h-screen flex flex-col">
+    <!-- ヘッダー -->
+    <?php include "../components/header.php"; ?>
 
-            <div class="mb-4">
-                <strong class="block text-gray-700">ペットの種類:</strong>
-                <p class="mt-1 text-gray-600"><?= $animalData['name'] ?></p>
-            </div>
+    <!-- メインコンテンツ -->
+    <main class="flex-grow flex items-center justify-center px-4">
+        <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-lg">
+            <h2 class="text-3xl font-semibold text-center text-gray-800 mb-6">会員登録確認</h2>
+            <form action="add.php" method="post">
+                <!-- 名前 -->
+                <div class="mb-6">
+                    <label for="name" class="block text-gray-700 font-medium mb-2">氏名</label>
+                    <p class="px-4 py-2 bg-gray-100 border border-gray-300 rounded-md"><?= htmlspecialchars($post["name"]); ?></p>
+                </div>
 
-            <div class="mb-4">
-                <strong class="block text-gray-700">ペットの画像:</strong>
-                <img src="<?= $imagePath ?>" alt="画像" class="mt-2 w-full h-auto rounded-md">
-            </div>
+                <!-- Email -->
+                <div class="mb-6">
+                    <label for="email" class="block text-gray-700 font-medium mb-2">Email</label>
+                    <p class="px-4 py-2 bg-gray-100 border border-gray-300 rounded-md"><?= htmlspecialchars($post["email"]); ?></p>
+                </div>
 
-            <div class="mb-4">
-                <strong class="block text-gray-700">説明:</strong>
-                <p class="mt-1 text-gray-600"><?= nl2br($posts['description']) ?></p>
-            </div>
+                <!-- 住所 -->
+                <div class="mb-6">
+                    <label for="address" class="block text-gray-700 font-medium mb-2">住所</label>
+                    <p class="px-4 py-2 bg-gray-100 border border-gray-300 rounded-md"><?= htmlspecialchars($post["address"]); ?></p>
+                </div>
 
-            <div class="flex justify-between mt-6">
-                <a href="./" class="bg-gray-300 text-gray-800 p-2 rounded-md hover:bg-gray-400">戻る</a>
-                <button type="submit" class="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600">登録</button>
-            </div>
-            <input type="hidden" name="name" value="<?= $posts['name']; ?>">
-            <input type="hidden" name="animal_id" value="<?= $posts['animal_id']; ?>">
-            <input type="hidden" name="description" value="<?= $posts['description']; ?>">
-            <input type="hidden" name="image_name" value="<?= $posts['image_name']; ?>">
-        </form>
-    </div>
+                <!-- 電話番号 -->
+                <div class="mb-6">
+                    <label for="phone" class="block text-gray-700 font-medium mb-2">電話番号</label>
+                    <p class="px-4 py-2 bg-gray-100 border border-gray-300 rounded-md"><?= htmlspecialchars($post["phone"]); ?></p>
+                </div>
+
+                <!-- ボタン -->
+                <div class="flex justify-between mt-8">
+                    <button type="submit"
+                        class="w-1/2 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300">
+                        登録
+                    </button>
+                    <a href="./input.php"
+                        class="w-1/2 ml-4 text-center px-4 py-2 border border-blue-500 text-blue-500 rounded-md hover:bg-blue-100 focus:outline-none focus:ring focus:ring-blue-300">
+                        戻る
+                    </a>
+                </div>
+            </form>
+        </div>
+    </main>
 </body>
 
 </html>

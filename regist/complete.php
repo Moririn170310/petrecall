@@ -1,9 +1,11 @@
 <?php
-require_once "../models/Animal.php";
+session_start();
+session_regenerate_id(true);
 
-$animal = new Animal();
-$animals = $animal->getList();
-
+//セッションが空でなければ、前回のデータをリセット
+if (isset($_SESSION['regist'])) {
+    unset($_SESSION['regist']);
+}
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -11,16 +13,33 @@ $animals = $animal->getList();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>犬の登録画面</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <title>ペット検索システム - 会員登録完了</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="bg-gray-100 flex items-center justify-center min-h-screen">
-    <div class="bg-white p-8 rounded-lg shadow-md w-96">
-        <h2 class="text-2xl font-bold mb-6 text-center">ペットの登録完了</h2>
-        <!-- href属性をindex.phpに変更 -->
-        <a href="index.php">TOP</a>
-    </div>
+<body class="bg-gray-100 min-h-screen flex flex-col">
+    <!-- ヘッダー -->
+    <?php include "../components/header.php"; ?>
+
+    <!-- メインコンテンツ -->
+    <main class="flex-grow flex items-center justify-center px-4">
+        <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-lg">
+            <h2 class="text-3xl font-semibold text-center mb-4 text-gray-800">会員登録完了</h2>
+            <p class="text-center text-gray-700 mb-8">
+                ご登録ありがとうございます。会員登録が完了しました。
+            </p>
+            <div class="flex justify-between">
+                <a href="../"
+                    class="w-1/2 text-center px-4 py-2 mr-2 border border-blue-500 text-blue-500 rounded hover:bg-blue-100 focus:outline-none focus:ring focus:ring-blue-300">
+                    トップページ
+                </a>
+                <a href="../login/"
+                    class="w-1/2 text-center px-4 py-2 ml-2 border border-blue-500 text-blue-500 rounded hover:bg-blue-100 focus:outline-none focus:ring focus:ring-blue-300">
+                    ログイン
+                </a>
+            </div>
+        </div>
+    </main>
 </body>
 
 </html>
