@@ -98,7 +98,7 @@ $comments = $stmt_comments->fetchAll(PDO::FETCH_ASSOC);
             <p class="text-gray-600 p-2">Email: <?= htmlspecialchars($report_user['email']); ?></p>
             <p class="text-gray-600 p-2">電話: <?= htmlspecialchars($report_user['phone']); ?></p>
 
-            <div class="mt-2">
+            <div class="mt-4">
                 <?php if ($reward['is_payment']): ?>
                     <span class="px-4 py-2 bg-red-500 text-white rounded-md">支払い済み</span>
                     <?= number_format($reward['amount']) ?>円
