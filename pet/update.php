@@ -38,29 +38,50 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $posts['image_name'] = $image_name;
     }
 
-    // `UPDATE`クエリの作成
-    $sql = "UPDATE pets
-            SET name = :name,
-                animal_id = :animal_id,
-                description = :description,
-                image_name = :image_name,
-                is_resolved = :is_resolved,
-                updated_at = NOW()
-            WHERE id = :pet_id AND user_id = :user_id;";
+    try {
+        // トランザクション開始
+        $pdo->beginTransaction();
 
-    // パラメータのバインド
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute([
-        ':name' => $posts['name'],
-        ':animal_id' => $posts['animal_id'],
-        ':description' => $posts['description'],
-        ':image_name' => $posts['image_name'],
-        ':is_resolved' => $posts['is_resolved'],
-        ':pet_id' => $posts['pet_id'],
-        ':user_id' => $_SESSION['user']['id']
-    ]);
+        // `pets` テーブルを更新
+        $sql = "UPDATE pets
+                SET name = :name,
+                    animal_id = :animal_id,
+                    description = :description,
+                    image_name = :image_name,
+                    is_resolved = :is_resolved,
+                    updated_at = NOW()
+                WHERE id = :pet_id AND user_id = :user_id;";
 
-    // 編集後のリダイレクト
-    header('Location: ../user/');
-    exit;
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([
+            ':name' => $posts['name'],
+            ':animal_id' => $posts['animal_id'],
+            ':description' => $posts['description'],
+            ':image_name' => $posts['image_name'],
+            ':is_resolved' => $posts['is_resolved'],
+            ':pet_id' => $posts['pet_id'],
+            ':user_id' => $_SESSION['user']['id']
+        ]);
+
+        // `comments` テーブルを解決済みに更新
+        if ($posts['is_resolved'] === 1) {
+            $sql_update_comments = "UPDATE comments SET updated_at = NOW() WHERE pet_id = :pet_id;";
+            $stmt_comments = $pdo->prepare($sql_update_comments);
+            $stmt_comments->execute([':pet_id' => $posts['pet_id']]);
+        }
+
+        // トランザクションコミット
+        $pdo->commit();
+
+        // 成功時のリダイレクト
+        header('Location: ../user/');
+        exit;
+
+    } catch (PDOException $e) {
+        // エラー時にロールバック
+        $pdo->rollBack();
+        echo "エラーが発生しました: " . $e->getMessage();
+        exit;
+    }
 }
+?>

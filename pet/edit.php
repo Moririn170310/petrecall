@@ -53,6 +53,7 @@ $animals = $animal->getList();
         <form action="update.php" method="post" enctype="multipart/form-data">
             <input type="hidden" name="pet_id" value="<?= htmlspecialchars($pet['id']); ?>">
 
+            <!-- 解決済みのチェックボックス -->
             <div class="mb-6">
                 <label class="block text-gray-700 font-medium mb-2">解決済み</label>
                 <label class="inline-flex items-center">
@@ -60,6 +61,7 @@ $animals = $animal->getList();
                     <span class="ml-2 text-gray-700">解決済みにする</span>
                 </label>
             </div>
+
             <div class="mb-6">
                 <label class="block text-gray-700 font-medium mb-2">ペットの名前</label>
                 <input type="text" name="name" value="<?= htmlspecialchars($pet['name']); ?>" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-300" required>

@@ -55,15 +55,20 @@ $animal_data = $animal->fetch($pet['animal_id']);
     <main class="flex-grow container mx-auto p-8">
         <h2 class="text-3xl font-bold text-center text-gray-800 mb-6">ペット情報</h2>
 
-        <!-- ペット情報 -->
+            <!-- ペット情報 -->
         <div class="bg-white p-6 rounded-lg shadow-lg mb-8">
             <div class="flex flex-col md:flex-row gap-6">
                 <div class="w-full md:w-1/2">
                     <img src="../uploads/<?= htmlspecialchars($pet['image_name']) ?>" alt="ペット画像" class="w-full h-auto rounded-md">
                 </div>
                 <div class="w-full md:w-1/2 space-y-4">
+                    <!-- 解決済みの表示 -->
                     <div class="my-2">
-                        <span class="px-4 py-2 bg-red-500 text-white rounded-md">解決済み</span>
+                        <?php if ($pet['is_resolved'] == 1): ?>
+                            <span class="px-4 py-2 bg-green-500 text-white rounded-md">解決済み</span>
+                        <?php else: ?>
+                            <span class="px-4 py-2 bg-red-500 text-white rounded-md">未解決</span>
+                        <?php endif; ?>
                     </div>
                     <h3 class="text-2xl font-semibold text-gray-700"><?= htmlspecialchars($pet['name']) ?></h3>
                     <p class="text-gray-600">種類: <?= htmlspecialchars($animal_data['name'] ?? '不明') ?></p>
@@ -74,6 +79,7 @@ $animal_data = $animal->fetch($pet['animal_id']);
                 </div>
             </div>
         </div>
+
 
         <!-- コメント入力欄 -->
         <div class="bg-white p-6 rounded-lg shadow-lg mb-8">
