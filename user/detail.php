@@ -99,8 +99,8 @@ $comments = $stmt_comments->fetchAll(PDO::FETCH_ASSOC);
             <p class="text-gray-600 p-2">電話: <?= htmlspecialchars($report_user['phone']); ?></p>
 
             <div class="mt-4">
-                <?php if ($reward['is_payment']): ?>
-                    <span class="px-4 py-2 bg-red-500 text-white rounded-md">支払い済み</span>
+            <?php if ($reward && $reward['is_payment']): ?>
+                <span class="px-4 py-2 bg-red-500 text-white rounded-md">支払い済み</span>
                     <?= number_format($reward['amount']) ?>円
                 <?php else: ?>
                     <div class="my-2">
