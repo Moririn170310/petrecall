@@ -5,7 +5,7 @@ require_once '../db.php';
 session_start();
 session_regenerate_id(true);
 
-//POSTデータ取得
+// POSTデータ取得
 $posts = $_POST;
 
 // name=email のデータ
@@ -13,7 +13,7 @@ $email = $posts['email'];
 // name=password のデータ
 $password = $posts['password'];
 
-//Email検索(SQL)
+// Email検索(SQL)
 $sql = "SELECT * FROM users WHERE email = ?;";
 $stmt = $pdo->prepare($sql);
 $stmt->execute([$email]);
@@ -24,7 +24,7 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
 $is_scussess = false;
 if ($user) {
     $hash = $user['password'];
-    //パスワードハッシュ検証
+    // パスワードハッシュ検証
     $is_scussess = password_verify($password, $hash);
 }
 
@@ -32,9 +32,11 @@ if ($is_scussess) {
     // セッションにユーザを登録
     $_SESSION['user'] = $user;
 
-    //ログイン成功の場合、user/ にリダイレクト
-    header('Location: ../user/');
+    // ログイン成功の場合、index.php にリダイレクト
+    header('Location: ../index.php');
+    exit;
 } else {
-    //ログイン失敗の場合、login/input.php にリダイレクト
+    // ログイン失敗の場合、input.php にリダイレクト
     header('Location: input.php');
+    exit;
 }

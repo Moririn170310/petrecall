@@ -1,9 +1,11 @@
 <header class="bg-white shadow">
     <div class="max-w-7xl mx-auto px-4 py-6 flex justify-between items-center">
-        <h1 class="text-3xl font-bold text-gray-800"><a href="../">ペット検索システム</a></h1>
+        <h1 class="text-3xl font-bold text-gray-800"><a href="../index.php">ペット検索システム</a></h1>
         <nav>
             <ul class="flex space-x-4">
+                <li><a href="../index.php" class="text-gray-600 hover:text-blue-500">トップページ</a></li> <!-- 追加 -->
                 <li><a href="../pet/" class="text-gray-600 hover:text-blue-500">ペット一覧</a></li>
+                
                 <?php if (empty($user['id'])): ?>
                     <li><a href="../login/" class="text-gray-600 hover:text-blue-500">ログイン</a></li>
                     <li><a href="../regist/" class="text-gray-600 hover:text-blue-500">ユーザ登録</a></li>
