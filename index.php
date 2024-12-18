@@ -63,17 +63,17 @@ if (isset($_SESSION['user'])) {
                     <a href="pet/?animal_id=1" class="bg-white p-6 rounded-lg shadow hover:shadow-lg pet-card" data-name="犬">
                         <img src="img/2.jpeg" alt="犬" class="w-full h-32 object-cover rounded-md">
                         <h3 class="text-xl font-semibold mt-4">犬</h3>
-                        <p class="text-gray-500 mt-2">様々な種類の犬を検索できます</p>
+                        <p class="text-gray-500 mt-2"></p>
                     </a>
                     <a href="pet/?animal_id=2" class="bg-white p-6 rounded-lg shadow hover:shadow-lg pet-card" data-name="猫">
                         <img src="img/neko.webp" alt="猫" class="w-full h-32 object-cover rounded-md">
                         <h3 class="text-xl font-semibold mt-4">猫</h3>
-                        <p class="text-gray-500 mt-2">猫の里親探しに役立つ情報が満載</p>
+                        <p class="text-gray-500 mt-2"></p>
                     </a>
                     <a href="pet/?animal_id=3" class="bg-white p-6 rounded-lg shadow hover:shadow-lg pet-card" data-name="鳥">
                         <img src="img/tori.jpg" alt="鳥" class="w-full h-32 object-cover rounded-md">
                         <h3 class="text-xl font-semibold mt-4">鳥</h3>
-                        <p class="text-gray-500 mt-2">鳥の種類ごとの情報が充実</p>
+                        <p class="text-gray-500 mt-2"></p>
                     </a>
                 </div>
             </section>
